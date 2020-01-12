@@ -22,6 +22,16 @@ def stac():
     modules.svod_stac_smo.svod_ks_ds(source_dir, source, ds)
     print('свод общий дс без ТФОМС')
 
+def ambul():
+    modules.svod.svod_amb(source_dir, source)
+    print('Поликлиника')
+    modules.svod_amb_smo.svod_smo_amb(source_dir, source)
+    print('Поликлиника, свод по страховым')
+    modules.svod_amb_smo.svod_amb_tfoms(source_dir, source)
+    print('Поликлиника, свод по больнице с ТФОМС')
+    modules.svod_amb_smo.svod_amb(source_dir, source)
+    print('Поликлиника, свод по больнице без ТФОМС')
+
 print('now is', modules.time.ctime())
 settings = 'settings.xml'
 smo = 'sp_smo.xml'
@@ -45,29 +55,29 @@ file_ok = False
 bill_go = False
 
 #Ищем файл подходящий под параметры ответа из ТФОМС
-#fileAnswerTFOMS = modules.files.FindAnswerTFOMS(source_dir, codeLPU)
-#if fileAnswerTFOMS == False:
-#    modules.sys.exit(0)
+fileAnswerTFOMS = modules.files.FindAnswerTFOMS(source_dir, codeLPU)
+if fileAnswerTFOMS == False:
+    modules.sys.exit(0)
 #Очищаем временную папку
-#modules.files.clear_dir(work_dir)
+modules.files.clear_dir(work_dir)
 #Ищем и распаковывам файл с ответом
-#modules.files.UnZipFile(fileAnswerTFOMS, work_dir)
+modules.files.UnZipFile(fileAnswerTFOMS, work_dir)
 
 #распаковываем архив во временную папку
-#list_f = modules.os.listdir(path=str(work_dir))
-#for name in list_f:
-#    file = work_dir + name
-#    if name.find(codeLPU) != -1 and name.find('.zip') != -1 and name.find('_err') == -1 and name.find('_99') == -1:
-#        bill_go = True
-#        dir_out = work_dir + modules.os.path.splitext(name)[0]
-#        modules.os.mkdir (dir_out)
-#        modules.files.UnZipFile(file, dir_out)
-#    modules.os.remove(file)
+list_f = modules.os.listdir(path=str(work_dir))
+for name in list_f:
+    file = work_dir + name
+    if name.find(codeLPU) != -1 and name.find('.zip') != -1 and name.find('_err') == -1 and name.find('_99') == -1:
+        bill_go = True
+        dir_out = work_dir + modules.os.path.splitext(name)[0]
+        modules.os.mkdir (dir_out)
+        modules.files.UnZipFile(file, dir_out)
+    modules.os.remove(file)
 
-if True:#bill_go:
-#    modules.os.remove(fileAnswerTFOMS)
+if bill_go:
+    modules.os.remove(fileAnswerTFOMS)
     
-#    modules.files.clearAnswer(work_dir)
+    modules.files.clearAnswer(work_dir)
     source = []
     for name_dir in modules.os.listdir( path= str (work_dir)):
         for name_file in modules.os.listdir( path= str (work_dir + name_dir)):
@@ -77,15 +87,8 @@ if True:#bill_go:
         result, id_smo = modules.parse.summ(source[i])
         modules.bill.bill(result, id_smo, source_dir)
 
-    modules.svod.svod_amb(source_dir, source)
-    print('Поликлиника')
-    modules.svod_amb_smo.svod_smo_amb(source_dir, source)
-    print('Поликлиника, свод по страховым')
-    modules.svod_amb_smo.svod_amb_tfoms(source_dir, source)
-    print('Поликлиника, свод по больнице с ТФОМС')
-    modules.svod_amb_smo.svod_amb(source_dir, source)
-    print('Поликлиника, свод по больнице без ТФОМС')
-#    stac()
+    ambul()
+    stac()
 else:
     print('Нечего выполнять')
 print('now is', modules.time.ctime())

@@ -123,17 +123,17 @@ def calc_svod_smo(file_reports, pre_result):
                     tarif_in_xml = tarif_in_xml_Obj[0].childNodes[0].data
                     uet = float(sum_uls_in_xml) / float(tarif_in_xml)
                     parse_res[6] += modules.Decimal(int(uet*100)/100)
-                    vid_pos = 2
+                    vid_pos = 3
                 elif id_serv_in_xml == id_master_in_xml:
                     kod_usl_in_xml_Obj = usl_in_xml.getElementsByTagName('CODE_USL')
                     kod_usl_in_xml = kod_usl_in_xml_Obj[0].childNodes[0].data
                     #Код услуги
                     parse_res[2] = kod_usl_in_xml
                     vid_pos = int(int(kod_usl_in_xml)//1000000 - int(parse_res[1])*10)
-                    vid_pos = 2 if vid_pos != 1 else 1
+                    vid_pos = 1 if vid_pos != 2 else 2
             
             if vid_pos == 1:
-                parse_res[3] = kol_usl
+                parse_res[3] = 1
             elif vid_pos == 2:
                 parse_res[4] = 1
 
