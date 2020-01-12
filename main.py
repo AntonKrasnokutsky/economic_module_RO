@@ -73,13 +73,18 @@ if True:#bill_go:
         for name_file in modules.os.listdir( path= str (work_dir + name_dir)):
             file = work_dir + name_dir + modules.parse.delimiter + name_file
             source.append(modules.xml.dom.minidom.parse (file))
-#    for i in range (len(source)):
-#        result, id_smo = modules.parse.summ(source[i])
-#        modules.bill.bill(result, id_smo, source_dir)
+    for i in range (len(source)):
+        result, id_smo = modules.parse.summ(source[i])
+        modules.bill.bill(result, id_smo, source_dir)
 
     modules.svod.svod_amb(source_dir, source)
     print('Поликлиника')
     modules.svod_amb_smo.svod_smo_amb(source_dir, source)
+    print('Поликлиника, свод по страховым')
+    modules.svod_amb_smo.svod_amb_tfoms(source_dir, source)
+    print('Поликлиника, свод по больнице с ТФОМС')
+    modules.svod_amb_smo.svod_amb(source_dir, source)
+    print('Поликлиника, свод по больнице без ТФОМС')
 #    stac()
 else:
     print('Нечего выполнять')
