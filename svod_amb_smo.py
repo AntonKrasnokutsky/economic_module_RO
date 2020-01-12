@@ -109,6 +109,11 @@ def calc_svod_smo(file_reports, pre_result):
                 #Количество услуг в случае
                 parse_res[5] += 1
                 if parse_res[1] == '8300':
+                    kod_usl_in_xml_Obj = usl_in_xml.getElementsByTagName('CODE_USL')
+                    kod_usl_in_xml = kod_usl_in_xml_Obj[0].childNodes[0].data
+                    #Код услуги
+                    parse_res[2] = kod_usl_in_xml
+                    #расчет УЕТ
                     sum_uls_in_xml_Obj = usl_in_xml.getElementsByTagName('SUMV_USL')
                     sum_uls_in_xml = sum_uls_in_xml_Obj[0].childNodes[0].data
                     tarif_in_xml_Obj = usl_in_xml.getElementsByTagName('TARIF')
