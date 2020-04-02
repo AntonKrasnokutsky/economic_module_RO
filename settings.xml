@@ -1,8 +1,8 @@
 <?xml version='1.0' encoding='utf-8'?>
 <setting>
 	<name>settings.xml</name>
-	<source_dir>d:\1\</source_dir>
-	<work_dir>d:\tmp\</work_dir>
+	<source_dir>/bill/</source_dir>
+	<work_dir>/usr/sbin/bill/tmp/</work_dir>
 	<lpuId>43301</lpuId>
 	<id_MO>4330101</id_MO>
 	<MO>Муниципальное бюджетное учреждение здравоохранения «Центральная районная больница» Сальского района</MO>

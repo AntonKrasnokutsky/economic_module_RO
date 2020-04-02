@@ -63,19 +63,20 @@ def calc_svod_smo(file_reports, n_svod, pre_result):
     id_smo = file_reports.getElementsByTagName("PLAT")[0].childNodes[0].data
     
     for sluch in sluch_Obj:
-        uslInSluch = 0
         svod = int(sluch.getElementsByTagName("NSVOD")[0].childNodes[0].data)
         if svod//100 == n_svod:        
             usl_Obj = sluch.getElementsByTagName('USL')
             for usl in usl_Obj:
                 parse_res = [0]*7
+                kd = None
                 try:
-                    parse_res[5] += int(usl.getElementsByTagName("KD")[0].childNodes[0].data)
+                    kd = int(usl.getElementsByTagName("KD")[0].childNodes[0].data)
                 except IndexError:
                     pass
-
                 summ = modules.Decimal(usl.getElementsByTagName("SUMV_USL")[0].childNodes[0].data)
-                if summ != 0:
+                if kd != None or summ != modules.Decimal(0):
+                    parse_res[5] = kd
+                    parse_res[4] = kd
                     kod_lpu_Obj = usl.getElementsByTagName('KODLPU')
                     parse_res[0] = int(kod_lpu_Obj[0].childNodes[0].data)
                     profil_Obj = usl.getElementsByTagName('PODR')
@@ -83,10 +84,9 @@ def calc_svod_smo(file_reports, n_svod, pre_result):
                     kod_usl_Obj = usl.getElementsByTagName('CODE_USL')
                     parse_res[2] = kod_usl_Obj[0].childNodes[0].data
 
-                    #Фактическое количесво дней в стационаре
-                    parse_res[5] += int(usl.getElementsByTagName("KD")[0].childNodes[0].data)
-                    parse_res[6] += summ
-                    parse_res[3] += 1
+#                    summ = modules.Decimal(usl.getElementsByTagName("SUMV_USL")[0].childNodes[0].data)
+                    parse_res[6] = summ
+                    parse_res[3] = 1 if summ != 0 else 0
                     findeadd(pre_result, *parse_res)
                 
     return id_smo, month, year

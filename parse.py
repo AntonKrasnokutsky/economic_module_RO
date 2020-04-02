@@ -1,6 +1,6 @@
 import modules
 
-delimiter = '\\'
+delimiter = '/'
 dispancer_adult_I = 'ДВ4'
 dispancer_adult_II = 'ДВ2'
 profosmotr_adult = 'ОПВ'
