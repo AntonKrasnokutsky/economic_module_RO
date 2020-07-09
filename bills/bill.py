@@ -1,8 +1,8 @@
 import modules
 
-format_file = 'format.xml'
-smo_file = 'smo.xml'
-provder_file = 'provider.xml'
+format_file = 'settings//format.xml'
+smo_file = 'settings//smo.xml'
+provder_file = 'settings//provider.xml'
 files=(provder_file, smo_file, format_file)
 
 def preparing_of_report(SourceFile, bill_sheet, id_smo, result):

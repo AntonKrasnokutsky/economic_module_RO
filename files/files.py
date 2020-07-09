@@ -1,7 +1,7 @@
 import os
 import shutil
 import zipfile
-import parse
+from files import parse
 
 def clear_dir(path):
     """ Очистка временной папаки от всего содержимого

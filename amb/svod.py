@@ -151,7 +151,7 @@ def svod_amb(sourceDir, source):
     svod_out_sheet = svod_out_file.active
     svod_out_sheet.title = 'Сводный'
     try:
-        file_format = modules.xml.dom.minidom.parse ('svod_amb.xml')
+        file_format = modules.xml.dom.minidom.parse ('settings//svod_amb.xml')
     except FileotFoundError:
         print ('Файл svod_amb.xml не существует')
         return None

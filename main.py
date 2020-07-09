@@ -33,8 +33,7 @@ def ambul():
     print('Поликлиника, свод по больнице без ТФОМС')
 
 print('now is', modules.time.ctime())
-settings = 'settings.xml'
-smo = 'sp_smo.xml'
+settings = 'settings//settings.xml'
 
 ks = 1
 ds = 2
@@ -75,7 +74,7 @@ for name in list_f:
     modules.os.remove(file)
 
 if bill_go:
-    modules.os.remove(fileAnswerTFOMS)
+    #modules.os.remove(fileAnswerTFOMS)
     
     modules.files.clearAnswer(work_dir)
     source = []

@@ -211,7 +211,7 @@ def summ(SourceFile:str):
     return result, schet
 
 def settings_MO():
-    file_settings = modules.xml.dom.minidom.parse ('settings.xml')
+    file_settings = modules.xml.dom.minidom.parse ('settings//settings.xml')
     idMO = file_settings.getElementsByTagName('id_MO')[0].childNodes[0].data
     MO = file_settings.getElementsByTagName('MO')[0].childNodes[0].data
     return idMO, MO

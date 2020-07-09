@@ -2,9 +2,9 @@
 <setting>
 	<name>settings.xml</name>
 	<!-- Сетевая папка из которой берутся файлы реестра и выкладываются результаты -->
-	<source_dir>/bill/</source_dir>
+	<source_dir>/Data/input/</source_dir>
 	<!-- Папка для временных файлов, должна отличаться от source_dir -->
-	<work_dir>/usr/sbin/bill/tmp/</work_dir>
+	<work_dir>/Data/output/</work_dir>
 	<!-- Первые 5 цифр кода лпу по ТФОМС для поиска файлов реестров-->
 	<lpuId>43301</lpuId>
     <!-- Полный код СПУ по тфомс -->

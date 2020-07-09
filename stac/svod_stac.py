@@ -140,7 +140,7 @@ def svod_ks_ds_tfoms(sourceDir, source, stac):
     svod_out_sheet = svod_out_file.active
     svod_out_sheet.title = 'Сводный'
     try:
-        file_format = modules.xml.dom.minidom.parse ('svod_stac.xml')
+        file_format = modules.xml.dom.minidom.parse ('settings//svod_stac.xml')
     except FileotFoundError:
         print ('Файл svod_stac.xml не существует')
         return None
@@ -165,7 +165,7 @@ def svod_ks_ds(sourceDir, source, stac):
     svod_out_sheet = svod_out_file.active
     svod_out_sheet.title = 'Сводный'
     try:
-        file_format = modules.xml.dom.minidom.parse ('svod_stac.xml')
+        file_format = modules.xml.dom.minidom.parse ('settings//svod_stac.xml')
     except FileotFoundError:
         print ('Файл svod_stac.xml не существует')
         return None
