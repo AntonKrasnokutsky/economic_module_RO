@@ -23,8 +23,7 @@ def calc_svod(file_reports):
         if svod//100 == 3:        #Амболаторная помощь
             result[4] += summ
             usl_Obj = sluch.getElementsByTagName('USL')
-            for usl in usl_Obj:
-                uslInSluch += 1
+            uslInSluch = len(usl_Obj)
             try:
                 disp = sluch.getElementsByTagName("DISP")[0].childNodes[0].data
             except IndexError:
@@ -33,8 +32,8 @@ def calc_svod(file_reports):
             if profile >= 85 and profile <= 90:
                 usl_Obj = sluch.getElementsByTagName('USL')
                 for usl in usl_Obj:
-                    summ_usl = float(sluch.getElementsByTagName("SUMV_USL")[0].childNodes[0].data)
-                    tarif = float(sluch.getElementsByTagName("TARIF")[0].childNodes[0].data)
+                    summ_usl = float(usl.getElementsByTagName("SUMV_USL")[0].childNodes[0].data)
+                    tarif = float(usl.getElementsByTagName("TARIF")[0].childNodes[0].data)
                     uet = int(summ_usl/tarif*100)
                     result[3] += modules.Decimal(uet)/100
             elif uslInSluch == 1:
@@ -45,9 +44,9 @@ def calc_svod(file_reports):
             else:
                 result[1] += 1 if uslInSluch != 0 else 0
                 result[2] += uslInSluch
-            idcase = sluch.getElementsByTagName("IDCASE")[0].childNodes[0].data
+            #idcase = sluch.getElementsByTagName("IDCASE")[0].childNodes[0].data
             #print(idcase, disp)
-            cod_usl_Obj = sluch.getElementsByTagName("CODE_USL")
+            #cod_usl_Obj = sluch.getElementsByTagName("CODE_USL")
 #            for cod_usl in cod_usl_Obj:
 #                disp_out_sheet.cell(row = rows, column = 1).value = sluch.getElementsByTagName("IDCASE")[0].childNodes[0].data
 #                disp_out_sheet.cell(row = rows, column = 2).value = disp
@@ -152,7 +151,7 @@ def svod_amb(sourceDir, source):
     svod_out_sheet.title = 'Сводный'
     try:
         file_format = modules.xml.dom.minidom.parse ('settings//svod_amb.xml')
-    except FileotFoundError:
+    except FileNotFoundError:
         print ('Файл svod_amb.xml не существует')
         return None
     svod_format(svod_out_sheet, file_format)
