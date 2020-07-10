@@ -6,7 +6,7 @@ apres = [0, 0, 0, 0]
 def replace_prof(result):
     try:
         file_format = modules.xml.dom.minidom.parse ('settings//profiles_stac.xml')
-    except FileotFoundError:
+    except FileNotFoundError:
         print ('Файл profiles_stac.xml не существует')
         return None
     zap_in_xml_Obj = file_format.getElementsByTagName('zap')
@@ -410,7 +410,7 @@ def svod_smo_ks_ds(sourceDir, source, stac):
     #по страховым
     try:
         file_format = modules.xml.dom.minidom.parse ('settings//svod_stac_smo.xml')
-    except FileotFoundError:
+    except FileNotFoundError:
         print ('Файл svod_stac_smo.xml не существует')
         return None
     for i in range(len(source)):
@@ -422,20 +422,20 @@ def svod_smo_ks_ds(sourceDir, source, stac):
         svod_format(svod_out_sheet, file_format)
         start_row = int(file_format.getElementsByTagName('start_row')[0].childNodes[0].data)
         
-        smo, month, year = calc_svod_smo(source[i], stac, result)
+        smo = calc_svod_smo(source[i], stac, result)
         if result != []:
             result.sort()
             replace_prof(result)
             svod_append(svod_out_sheet, file_format, start_row, result)
             stac_stat = 'кс' if stac == 1 else 'дс'
-            svod_out_file.save(sourceDir + modules.parse.delimiter + 'svod_stac_' + stac_stat + '_' + str(smo) +'.xlsx')
+            svod_out_file.save(sourceDir + modules.parse.delimiter + 'svod_stac_' + stac_stat + '_' + str(smo[0]) +'.xlsx')
         svod_out_file.close
 
 def svod_ks_ds_tfoms(sourceDir, source, stac):
 #по ЛПУ с ТФОМС
     try:
         file_format = modules.xml.dom.minidom.parse ('settings//svod_stac_smo.xml')
-    except FileotFoundError:
+    except FileNotFoundError:
         print ('Файл svod_stac_smo.xml не существует')
         return None
     result = []
@@ -445,9 +445,9 @@ def svod_ks_ds_tfoms(sourceDir, source, stac):
         svod_out_sheet.title = 'Сводный'
         
         svod_format(svod_out_sheet, file_format)
-        row = start_row = int(file_format.getElementsByTagName('start_row')[0].childNodes[0].data)
+        start_row = int(file_format.getElementsByTagName('start_row')[0].childNodes[0].data)
         
-        smo, month, year = calc_svod_smo(source[i], stac, result)
+        calc_svod_smo(source[i], stac, result)
 
     if result != []:
         result.sort()
@@ -462,7 +462,7 @@ def svod_ks_ds(sourceDir, source, stac):
 #по ЛПУ без ТФОМС
     try:
         file_format = modules.xml.dom.minidom.parse ('settings//svod_stac_smo.xml')
-    except FileotFoundError:
+    except FileNotFoundError:
         print ('Файл svod_stac_smo.xml не существует')
         return None
     result = []
@@ -472,10 +472,10 @@ def svod_ks_ds(sourceDir, source, stac):
         svod_out_sheet.title = 'Сводный'
         
         svod_format(svod_out_sheet, file_format)
-        row = start_row = int(file_format.getElementsByTagName('start_row')[0].childNodes[0].data)
+        start_row = int(file_format.getElementsByTagName('start_row')[0].childNodes[0].data)
         id_smo = source[i].getElementsByTagName("PLAT")[0].childNodes[0].data
         if id_smo != '61010':
-            smo, month, year = calc_svod_smo(source[i], stac, result)
+            calc_svod_smo(source[i], stac, result)
 
     if result != []:
         result.sort()

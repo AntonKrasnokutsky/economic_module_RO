@@ -156,7 +156,6 @@ def svod_append(svod_out_sheet, format, row, result):
     ar_lpu = []
     for lpu in range(len(result)):
         ar_prof[0] = row
-        ar_podr = []
         for prof in range(1, len(result[lpu])):
             for code_usl in range (1, len(result[lpu][prof])):
                 iter = 0
@@ -361,12 +360,12 @@ def svod_smo_amb(sourceDir, source):
         svod_format(svod_out_sheet, file_format)
         start_row = int(file_format.getElementsByTagName('start_row')[0].childNodes[0].data)
         
-        smo, month, year = calc_svod_smo(source[i], result)
+        smo = calc_svod_smo(source[i], result)
         if result != []:
             result.sort()
             replace_prof(result)
             svod_append(svod_out_sheet, file_format, start_row, result)
-            svod_out_file.save(sourceDir + modules.parse.delimiter + 'svod_amb_' + str(smo) +'.xlsx')
+            svod_out_file.save(sourceDir + modules.parse.delimiter + 'svod_amb_' + str(smo[0]) +'.xlsx')
         svod_out_file.close
 
 def svod_amb_tfoms(sourceDir, source):
@@ -383,10 +382,7 @@ def svod_amb_tfoms(sourceDir, source):
         svod_out_sheet.title = 'Сводный'
         
         svod_format(svod_out_sheet, file_format)
-        row = start_row = int(file_format.getElementsByTagName('start_row')[0].childNodes[0].data)
-        
-        #smo, month, year = 
-        print ('smo, month, year = ')
+        start_row = int(file_format.getElementsByTagName('start_row')[0].childNodes[0].data)
         calc_svod_smo(source[i], result)
 
     if result != []:
@@ -411,10 +407,11 @@ def svod_amb(sourceDir, source):
         svod_out_sheet.title = 'Сводный'
         
         svod_format(svod_out_sheet, file_format)
-        row = start_row = int(file_format.getElementsByTagName('start_row')[0].childNodes[0].data)
+        start_row = int(file_format.getElementsByTagName('start_row')[0].childNodes[0].data)
         id_smo = source[i].getElementsByTagName("PLAT")[0].childNodes[0].data
         if id_smo != '61010':
-            smo, month, year = calc_svod_smo(source[i], result)
+            #smo, month, year = calc_svod_smo(source[i], result)
+            calc_svod_smo(source[i], result)
 
     if result != []:
         result.sort()

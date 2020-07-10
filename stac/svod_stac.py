@@ -110,7 +110,6 @@ def calc_svod(file_reports, n_svod):
     result = [0]*4
     pacient = 0
     for sluch in sluch_Obj:
-        uslInSluch = 0
         svod = int(sluch.getElementsByTagName("NSVOD")[0].childNodes[0].data)
         if svod//100 == n_svod:        #Амболаторная помощь
             
@@ -141,7 +140,7 @@ def svod_ks_ds_tfoms(sourceDir, source, stac):
     svod_out_sheet.title = 'Сводный'
     try:
         file_format = modules.xml.dom.minidom.parse ('settings//svod_stac.xml')
-    except FileotFoundError:
+    except FileNotFoundError:
         print ('Файл svod_stac.xml не существует')
         return None
    
@@ -166,7 +165,7 @@ def svod_ks_ds(sourceDir, source, stac):
     svod_out_sheet.title = 'Сводный'
     try:
         file_format = modules.xml.dom.minidom.parse ('settings//svod_stac.xml')
-    except FileotFoundError:
+    except FileNotFoundError:
         print ('Файл svod_stac.xml не существует')
         return None
    

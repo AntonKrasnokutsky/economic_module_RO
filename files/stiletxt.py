@@ -13,9 +13,9 @@ def borders(border=border_none):
     if border[0]!=None:
         bor.left=openpyxl.styles.Side(border_style='thin', color=border[0])
     if border[1]!=None:
-        bor.right=right=openpyxl.styles.Side(border_style='thin', color=border[1])
+        bor.right=openpyxl.styles.Side(border_style='thin', color=border[1])
     if border[2]!=None:
-        bor.top=top=openpyxl.styles.Side(border_style='thin',color=border[2])
+        bor.top=openpyxl.styles.Side(border_style='thin',color=border[2])
     if border[3]!=None:
         bor.bottom=openpyxl.styles.Side(border_style='thin',color=border[3])
 

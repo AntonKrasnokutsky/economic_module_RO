@@ -5,7 +5,6 @@ def koptxt(kop):
     if kop<20 and kop>10:
         return 'копеек'
     else:
-        t1=kop/10
         t2=int(kop/10)*10
         tm=kop-t2
         return txt[tm]

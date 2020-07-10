@@ -7,11 +7,6 @@ files=(provder_file, smo_file, format_file)
 
 def preparing_of_report(SourceFile, bill_sheet, id_smo, result):
     try:
-        smoObj = modules.parse.parse(SourceFile, 'smo_id')
-        smo = smoObj[0].childNodes[0].data
-    except IndexError:
-        pass
-    else:
         nodes_smo = modules.parse.parse(SourceFile, 'smo')
         for node_smo in nodes_smo:
             dataObj = modules.parse.parse(node_smo, 'smo_id')
@@ -19,6 +14,8 @@ def preparing_of_report(SourceFile, bill_sheet, id_smo, result):
                 data = smoid.childNodes[0].data
                 if data.find(id_smo[0]) != -1:
                     nodes_smo = node_smo
+    except IndexError:
+        print ('IndexError: ', IndexError)
 
     modules.outxlsx.set_format(bill_sheet, nodes_smo)
     #ширина ячеек
@@ -47,7 +44,7 @@ def oms_format(bill_sheet_out, result, id_smo):
         try:
             SourceFile = modules.xml.dom.minidom.parse (filename)
         except FileNotFoundError:
-            print ('Файл ' + SourcePath + ' не существует')
+            print ('Файл ' + SourceFile + ' не существует')
         SourceFile.normalize()
         preparing_of_report(SourceFile, bill_sheet_out, id_smo, result)
 

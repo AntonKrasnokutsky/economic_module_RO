@@ -108,8 +108,6 @@ def summ(SourceFile:str):
     year_schet = books[0].getElementsByTagName("YEAR")[0].childNodes[0].data
     schet = [id_smo, nschet, data_schet, month_schet, year_schet]
 
-    titles = []
-    
     if SourceFile.getElementsByTagName("PLAT")[0].childNodes[0].data != '61010':
         result = [modules.Decimal('0.00')]*28
 
