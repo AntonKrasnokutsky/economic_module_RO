@@ -19,8 +19,8 @@ def stac():
     print('свод общий дс')
     modules.svod_stac_smo.svod_ks_ds(source_dir, source, ks)
     print('свод общий кс без ТФОМС')
-    #modules.svod_stac_smo.svod_ks_ds(source_dir, source, ds)
-    #print('свод общий дс без ТФОМС')
+    modules.svod_stac_smo.svod_ks_ds(source_dir, source, ds)
+    print('свод общий дс без ТФОМС')
 
 def ambul():
     modules.svod.svod_amb(source_dir, source)
@@ -74,7 +74,7 @@ for name in list_f:
     modules.os.remove(file)
 
 if bill_go:
-    #modules.os.remove(fileAnswerTFOMS)
+    modules.os.remove(fileAnswerTFOMS)
     
     modules.files.clearAnswer(work_dir)
     source = []
